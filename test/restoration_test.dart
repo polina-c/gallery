@@ -6,6 +6,7 @@ import 'package:gallery/pages/demo.dart';
 import 'package:gallery/pages/home.dart';
 import 'package:gallery/studies/reply/app.dart';
 import 'package:gallery/studies/reply/search_page.dart';
+import 'package:memory_tools/leak_detector.dart' as leak_detector;
 
 void main() {
   testWidgets(
@@ -53,6 +54,8 @@ void main() {
       await tester.restartAndRestore();
       await tester.pump(const Duration(seconds: 1));
       expect(find.byKey(const ValueKey('app-bar@material')), findsOneWidget);
+
+      await leak_detector.forceGC();
     },
     variant: const TargetPlatformVariant(
       <TargetPlatform>{TargetPlatform.android},
