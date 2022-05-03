@@ -300,11 +300,9 @@ packages:
   memory_tools:
     dependency: "direct dev"
     description:
-      path: memory_tools
-      ref: HEAD
-      resolved-ref: "07283c633f91caf83ef2d2e1af5d94f21a811f26"
-      url: "git://github.com/polina-c/spikes.git"
-    source: git
+      path: "../spikes/memory_tools"
+      relative: true
+    source: path
     version: "1.0.0"
   meta:
     dependency: "direct main"

@@ -44,9 +44,10 @@ dev_dependencies:
   test: ^1.16.8
   web_benchmarks: ^0.0.7
   memory_tools:
-    git:
-      url: git://github.com/polina-c/spikes.git
-      path: memory_tools
+    path: ../spikes/memory_tools
+#    git:
+#      url: git://github.com/polina-c/spikes.git
+#      path: memory_tools
 
 flutter:
   deferred-components:
