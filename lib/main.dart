@@ -16,9 +16,13 @@ import 'package:gallery/themes/gallery_theme_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
+import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
 
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
+  WidgetsFlutterBinding.ensureInitialized();
+  leak_detector.init();
+
   runApp(const GalleryApp());
 }
 
