@@ -21,7 +21,10 @@ import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
   WidgetsFlutterBinding.ensureInitialized();
-  leak_detector.init();
+  leak_detector.init(
+    fileName: 'leaks_from_gallery.yaml',
+    timeToGC: const Duration(seconds: 5),
+  );
 
   runApp(const GalleryApp());
 }
