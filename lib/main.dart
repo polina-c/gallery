@@ -23,7 +23,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   leak_detector.init(
     fileName: 'leaks_from_gallery.yaml',
-    timeToGC: const Duration(seconds: 5),
+    timeToGC: const Duration(seconds: 15),
   );
 
   runApp(const GalleryApp());
