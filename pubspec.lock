@@ -49,7 +49,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.9.0"
+    version: "2.8.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -305,7 +305,7 @@ packages:
     source: hosted
     version: "0.1.4"
   memory_tools:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       path: "../spikes/memory_tools"
       relative: true

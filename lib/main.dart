@@ -17,12 +17,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
 import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
+import 'package:flutter/src/widgets/widget_inspector.dart';
 
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
   WidgetsFlutterBinding.ensureInitialized();
   leak_detector.init(
-    fileName: 'leaks_from_gallery.yaml',
+    objectLocationGetter: (object) =>
+        describeCreationLocation(object) ?? 'location-not-detected',
     timeToGC: const Duration(seconds: 15),
   );
 
