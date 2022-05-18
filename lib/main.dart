@@ -26,6 +26,7 @@ void main() {
     objectLocationGetter: (object) =>
         describeCreationLocation(object) ?? 'location-not-detected',
     timeToGC: const Duration(seconds: 15),
+    tick: const Duration(seconds: 5),
   );
 
   runApp(const GalleryApp());
