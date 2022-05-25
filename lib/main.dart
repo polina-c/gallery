@@ -14,10 +14,9 @@ import 'package:gallery/pages/splash.dart';
 import 'package:gallery/routes.dart';
 import 'package:gallery/themes/gallery_theme_data.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
 
 export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
-import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
-import 'package:flutter/src/widgets/widget_inspector.dart';
 
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
@@ -25,8 +24,7 @@ void main() {
   leak_detector.init(
     objectLocationGetter: (object) =>
         describeCreationLocation(object) ?? 'location-not-detected',
-    timeToGC: const Duration(seconds: 15),
-    tick: const Duration(seconds: 5),
+    configureLogging: true,
   );
 
   runApp(const GalleryApp());

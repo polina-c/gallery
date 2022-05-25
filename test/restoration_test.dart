@@ -6,18 +6,8 @@ import 'package:gallery/pages/demo.dart';
 import 'package:gallery/pages/home.dart';
 import 'package:gallery/studies/reply/app.dart';
 import 'package:gallery/studies/reply/search_page.dart';
-import 'package:memory_tools/test_leak_detector.dart' as leak_detector;
 
 void main() {
-  setUpAll(() {
-    leak_detector.init(
-        timeToGC: const Duration(seconds: 2, minutes: 0), detailedOutput: true);
-  });
-
-  tearDownAll(() async {
-    await leak_detector.wrapUp();
-  });
-
   testWidgets(
     'State restoration test - Home Page',
     (tester) async {
