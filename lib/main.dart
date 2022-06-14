@@ -15,6 +15,7 @@ import 'package:gallery/routes.dart';
 import 'package:gallery/themes/gallery_theme_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
+//import 'package:logging/logging.dart';
 
 export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
 
