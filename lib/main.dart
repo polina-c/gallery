@@ -4,6 +4,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/memory.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter_gen/gen_l10n/gallery_localizations.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -14,7 +15,6 @@ import 'package:gallery/pages/splash.dart';
 import 'package:gallery/routes.dart';
 import 'package:gallery/themes/gallery_theme_data.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
 //import 'package:logging/logging.dart';
 
 export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
@@ -22,13 +22,7 @@ export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
   WidgetsFlutterBinding.ensureInitialized();
-  leak_detector.init(
-    objectLocationGetter: (object) =>
-        describeCreationLocation(object) ?? 'location-not-detected',
-    configureLogging: true,
-    //logLevel: Level.FINE,
-  );
-
+  startAppLeakTracking();
   runApp(const GalleryApp());
 }
 

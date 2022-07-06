@@ -31,11 +31,6 @@ dependencies:
   url_launcher: ^6.0.3
   vector_math: ^2.1.0
   shared_preferences: ^2.0.9
-  memory_tools:
-    path: ../spikes/memory_tools
-    #    git:
-    #      url: git://github.com/polina-c/spikes.git
-    #      path: memory_tools
 
 dev_dependencies:
   flutter_test:
