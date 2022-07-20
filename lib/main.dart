@@ -22,7 +22,7 @@ export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
   WidgetsFlutterBinding.ensureInitialized();
-  startAppLeakTracking();
+  startAppLeakTracking(enabledFamilies: {'flutterRendering'});
   runApp(const GalleryApp());
 }
 
