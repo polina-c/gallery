@@ -4,13 +4,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_gen/gen_l10n/gallery_localizations.dart';
 
 // BEGIN textFieldDemo
 
 class TextFieldDemo extends StatelessWidget {
-  const TextFieldDemo({Key? key}) : super(key: key);
+  const TextFieldDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class TextFieldDemo extends StatelessWidget {
 }
 
 class TextFormFieldDemo extends StatefulWidget {
-  const TextFormFieldDemo({Key? key}) : super(key: key);
+  const TextFormFieldDemo({super.key});
 
   @override
   TextFormFieldDemoState createState() => TextFormFieldDemoState();
@@ -40,7 +39,7 @@ class PersonData {
 
 class PasswordField extends StatefulWidget {
   const PasswordField({
-    Key? key,
+    super.key,
     this.restorationId,
     this.fieldKey,
     this.hintText,
@@ -51,7 +50,7 @@ class PasswordField extends StatefulWidget {
     this.onFieldSubmitted,
     this.focusNode,
     this.textInputAction,
-  }) : super(key: key);
+  });
 
   final String? restorationId;
   final Key? fieldKey;
@@ -285,6 +284,20 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo>
                   person.email = value;
                   _lifeStory.requestFocus();
                 },
+              ),
+              sizedBoxSpace,
+              // Disabled text field
+              TextFormField(
+                enabled: false,
+                restorationId: 'disabled_email_field',
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  filled: true,
+                  icon: const Icon(Icons.email),
+                  hintText: localizations.demoTextFieldYourEmailAddress,
+                  labelText: localizations.demoTextFieldEmail,
+                ),
+                keyboardType: TextInputType.emailAddress,
               ),
               sizedBoxSpace,
               TextFormField(

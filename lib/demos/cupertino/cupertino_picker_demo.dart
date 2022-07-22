@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 // BEGIN cupertinoPickersDemo
 
 class CupertinoPickerDemo extends StatefulWidget {
-  const CupertinoPickerDemo({Key? key}) : super(key: key);
+  const CupertinoPickerDemo({super.key});
 
   @override
   State<CupertinoPickerDemo> createState() => _CupertinoPickerDemoState();
@@ -26,6 +26,17 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
 
   // Value that is shown in the date picker in dateAndTime mode.
   DateTime dateTime = DateTime.now();
+
+  int _selectedWeekday = 0;
+
+  static List<String> getDaysOfWeek([String? locale]) {
+    final now = DateTime.now();
+    final firstDayOfWeek = now.subtract(Duration(days: now.weekday - 1));
+    return List.generate(7, (index) => index)
+        .map((value) => DateFormat(DateFormat.WEEKDAY, locale)
+            .format(firstDayOfWeek.add(Duration(days: value))))
+        .toList();
+  }
 
   void _showDemoPicker({
     required BuildContext context,
@@ -63,13 +74,15 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
             ),
           );
         },
-        child: _Menu(children: [
-          Text(GalleryLocalizations.of(context)!.demoCupertinoPickerDate),
-          Text(
-            DateFormat.yMMMMd().format(date),
-            style: const TextStyle(color: CupertinoColors.inactiveGray),
-          ),
-        ]),
+        child: _Menu(
+          children: [
+            Text(GalleryLocalizations.of(context)!.demoCupertinoPickerDate),
+            Text(
+              DateFormat.yMMMMd().format(date),
+              style: const TextStyle(color: CupertinoColors.inactiveGray),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -176,6 +189,53 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
     );
   }
 
+  Widget _buildPicker(BuildContext context) {
+    final locale = GalleryLocalizations.of(context)?.localeName;
+    final daysOfWeek = getDaysOfWeek(locale);
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          _showDemoPicker(
+            context: context,
+            child: _BottomPicker(
+              child: CupertinoPicker(
+                backgroundColor:
+                    CupertinoColors.systemBackground.resolveFrom(context),
+                itemExtent: 32.0,
+                magnification: 1.22,
+                squeeze: 1.2,
+                useMagnifier: true,
+                // This is called when selected item is changed.
+                onSelectedItemChanged: (selectedItem) {
+                  setState(() {
+                    _selectedWeekday = selectedItem;
+                  });
+                },
+                children: List<Widget>.generate(daysOfWeek.length, (index) {
+                  return Center(
+                    child: Text(
+                      daysOfWeek[index],
+                    ),
+                  );
+                }),
+              ),
+            ),
+          );
+        },
+        child: _Menu(
+          children: [
+            Text(GalleryLocalizations.of(context)!.demoCupertinoPicker),
+            Text(
+              daysOfWeek[_selectedWeekday],
+              style: const TextStyle(color: CupertinoColors.inactiveGray),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -193,6 +253,7 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
             _buildTimePicker(context),
             _buildDateAndTimePicker(context),
             _buildCountdownTimerPicker(context),
+            _buildPicker(context),
           ],
         ),
       ),
@@ -201,10 +262,7 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
 }
 
 class _BottomPicker extends StatelessWidget {
-  const _BottomPicker({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const _BottomPicker({required this.child});
 
   final Widget child;
 
@@ -236,10 +294,7 @@ class _BottomPicker extends StatelessWidget {
 }
 
 class _Menu extends StatelessWidget {
-  const _Menu({
-    Key? key,
-    required this.children,
-  }) : super(key: key);
+  const _Menu({required this.children});
 
   final List<Widget> children;
 

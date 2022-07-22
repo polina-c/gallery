@@ -26,9 +26,9 @@ enum _ExpandableSetting {
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({
-    Key? key,
+    super.key,
     required this.animationController,
-  }) : super(key: key);
+  });
 
   final AnimationController animationController;
 
@@ -254,7 +254,14 @@ class _SettingsPageState extends State<SettingsPage> {
         onTapSetting: () => onTapSetting(_ExpandableSetting.theme),
         isExpanded: _expandedSettingId == _ExpandableSetting.theme,
       ),
-      const SlowMotionSetting(),
+      ToggleSetting(
+        text: GalleryLocalizations.of(context)!.settingsSlowMotion,
+        value: options.timeDilation != 1.0,
+        onChanged: (isOn) => GalleryOptions.update(
+          context,
+          options.copyWith(timeDilation: isOn ? 5.0 : 1.0),
+        ),
+      ),
     ];
 
     return Material(
@@ -307,7 +314,7 @@ class _SettingsPageState extends State<SettingsPage> {
 }
 
 class SettingsAbout extends StatelessWidget {
-  const SettingsAbout({Key? key}) : super(key: key);
+  const SettingsAbout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -322,7 +329,7 @@ class SettingsAbout extends StatelessWidget {
 }
 
 class SettingsFeedback extends StatelessWidget {
-  const SettingsFeedback({Key? key}) : super(key: key);
+  const SettingsFeedback({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -330,12 +337,10 @@ class SettingsFeedback extends StatelessWidget {
       title: GalleryLocalizations.of(context)!.settingsFeedback,
       icon: Icons.feedback,
       onTap: () async {
-        const url = 'https://github.com/flutter/gallery/issues/new/choose/';
-        if (await canLaunch(url)) {
-          await launch(
-            url,
-            forceSafariVC: false,
-          );
+        final url =
+            Uri.parse('https://github.com/flutter/gallery/issues/new/choose/');
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url);
         }
       },
     );
@@ -343,7 +348,7 @@ class SettingsFeedback extends StatelessWidget {
 }
 
 class SettingsAttribution extends StatelessWidget {
-  const SettingsAttribution({Key? key}) : super(key: key);
+  const SettingsAttribution({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -427,10 +432,9 @@ class _SettingsLink extends StatelessWidget {
 /// Animate the settings list items to stagger in from above.
 class _AnimateSettingsListItems extends StatelessWidget {
   const _AnimateSettingsListItems({
-    Key? key,
     required this.animation,
     required this.children,
-  }) : super(key: key);
+  });
 
   final Animation<double> animation;
   final List<Widget> children;
