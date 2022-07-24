@@ -15,14 +15,22 @@ import 'package:gallery/pages/splash.dart';
 import 'package:gallery/routes.dart';
 import 'package:gallery/themes/gallery_theme_data.dart';
 import 'package:google_fonts/google_fonts.dart';
-//import 'package:logging/logging.dart';
 
 export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
 
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
   WidgetsFlutterBinding.ensureInitialized();
-  startAppLeakTracking(enabledFamilies: {'flutterRendering'});
+  startAppLeakTracking(
+    enabledFamilies: {'flutterRendering'},
+    typesToCollectStackTraceOnTrackingStart: {
+      // 'KeepAliveHandle',
+      // '_TextSpanEditingController',
+      // '_TextHighlightPainter',
+      // '_FloatingCursorPainter',
+      'RestorableBool',
+    },
+  );
   runApp(const GalleryApp());
 }
 
